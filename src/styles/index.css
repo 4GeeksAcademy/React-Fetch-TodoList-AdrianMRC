@@ -1,11 +1,73 @@
-/* 
 
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
+.container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+  }
 
-*/
+  .tasks-container {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background: #f8f9fa;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .task-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    border-bottom: 1px solid #eee;
+    transition: background 0.3s ease;
+    gap: 15px;
+  }
+  
+  .task-item:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .task-content {
+    flex-grow: 1;
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.5;
+    padding: 8px 0;
+  }
+  
+  .delete-button {
+    background: none;
+    border: none;
+    color: #ff4444;
+    font-size: 1.4em;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    flex-shrink: 0;
+    padding: 8px;
+    margin-left: auto; 
+  }
+  
+  .task-item:hover .delete-button {
+    opacity: 1;
+  }
+  
+  .empty-message {
+    text-align: center;
+    color: #666;
+    padding: 20px;
+    font-style: italic;
+  }
+  
