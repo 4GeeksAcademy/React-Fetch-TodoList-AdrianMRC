@@ -32,13 +32,13 @@ const todoService = {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           label: string,
-          done: false
+          is_done: false
         })
       });
       
       const data = await response.json();
       if (!response.ok) throw new Error('Error adding task');
-      return data;
+      return {...data, done: data.is_done};
     } catch (error) {
       console.error('Error adding task:', error);
       throw error;
@@ -74,7 +74,33 @@ const todoService = {
       console.error('Error clearing tasks:', error);
       throw error;
     }
-  }
+  },
+  updateTask: async (taskId, label, is_done) => {
+    try {
+      const response = await fetch(`${baseUrl}/todos/${taskId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ label, is_done })
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error('Error updating task');
+      return data;
+    } catch (error) {
+      console.error('Error updating task:', error);
+      throw error;
+    }
+  },
+  getUsers: async () => {
+    try {
+        const response = await fetch(`${baseUrl}/users`);
+        const data = await response.json();
+        if (!response.ok) throw new Error('Error fetching users');
+        return data;
+    } catch (error) {
+        console.error('Error getting users:', error);
+        return [];
+    }
+}
 };
 
 export default todoService;

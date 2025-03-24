@@ -42,7 +42,11 @@ function TodoList() {
         try {
             setIsLoading(true);
             const tasksData = await todoService.getTasks(username);
-            setTasks(tasksData);
+            setTasks(tasksData.map(task => ({
+                id: task.id,
+                label: task.label,
+                done: task.is_done
+              })));
         } catch (error) {
             console.error('Error loading tasks:', error);
             if (error.message.includes('not found')) {
@@ -85,7 +89,30 @@ function TodoList() {
         } catch (error) {
           console.error('Error clearing tasks:', error);
         }
-      };
+    };
+
+    const handleToggleTask = async (taskId, done) => {
+        try {
+          const taskToUpdate = tasks.find(task => task.id === taskId);
+          if (!taskToUpdate) return;
+          
+          await todoService.updateTask(taskId, taskToUpdate.label, done);
+          setTasks(prev => prev.map(task => 
+            task.id === taskId ? {...task, done} : task
+          ));
+        } catch (error) {
+          console.error('Error updating task:', error);
+          setError('Error updating task status');
+        }
+    };
+    
+    useEffect(() => {
+        const fetchUsers = async () => {
+            const users = await todoService.getUsers();
+            console.log("Usuarios disponibles:", users);
+        };
+        fetchUsers();
+    }, []);
 
     return (
         <div className="container">
@@ -136,6 +163,7 @@ function TodoList() {
                         <TasksList
                             tasks={tasks}
                             onDelete={handleDeleteTask}
+                            onToggle={handleToggleTask}
                         />
                     )}
                 </>

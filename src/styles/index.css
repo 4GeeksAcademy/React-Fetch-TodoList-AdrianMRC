@@ -71,3 +71,15 @@
     font-style: italic;
   }
   
+  .task-item.done {
+    background-color: #7fe088; 
+    opacity: 0.8;
+  }
+  
+  .task-item input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
+  .task-item {
+    transition: background-color 0.3s ease;
+  }
