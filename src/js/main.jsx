@@ -9,7 +9,7 @@ import "bootstrap"
 import '../styles/index.css'
 
 // components
-import TodoList from './components/List';
+import TodoList from './components/TodoList';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
